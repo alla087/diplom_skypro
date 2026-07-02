@@ -6,11 +6,11 @@ from config.settings import API_BASE_URL, API_KEY
 class APIClient:
     def __init__(self, api_key=API_KEY):
         self.base_url = API_BASE_URL
-        self.headers = {"X-API-KEY": api_key} if api_key else {}
+        self.headers = {"X-api-KEY": api_key} if api_key else {}
 
     def _request(self, method, endpoint, params=None):
         url = f"{self.base_url}{endpoint}"
-        with allure.step(f"API {method} {endpoint} с params={params}"):
+        with allure.step(f"api {method} {endpoint} с params={params}"):
             response = requests.request(
                 method, url, headers=self.headers, params=params
             )

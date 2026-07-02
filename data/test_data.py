@@ -1,10 +1,10 @@
-# Тестовые данные для UI и API
+# Тестовые данные для UI и api
 
 # --- UI ---
 SEARCH_QUERY = "Властелин"
 EXPECTED_MOVIE = "Властелин колец"
 
-# --- API ---
+# --- api ---
 API_SEARCH_QUERY = "человек паук"  # позитивный поиск
 YEAR_FOR_FILTER = 2025
 GENRE_FOR_FILTER = "криминал"

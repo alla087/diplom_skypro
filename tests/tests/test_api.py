@@ -13,7 +13,7 @@ from data.test_data import (
 from api.api_client import APIClient
 
 
-@allure.feature("API")
+@allure.feature("api")
 @allure.story("Поиск")
 @pytest.mark.api
 def test_search_movie_by_name(api_client):
@@ -39,15 +39,15 @@ def test_search_movie_by_name(api_client):
 
     allure.attach(
         json.dumps(resp_body, indent=4, ensure_ascii=False),
-        name="API Response",
+        name="api Response",
         attachment_type=allure.attachment_type.JSON,
     )
 
 
 def test_invalid_token(self):
-#    📌 Что проверяем: отправка запроса с неверным API-ключом.
+#    📌 Что проверяем: отправка запроса с неверным api-ключом.
 #    Шаги:
-#      1. Импортирую INVALID_API_KEY из data.test_data.
+#      1. Импортирую INVALID_API_KEY из data.data.
 from data.test_data import INVALID_API_KEY
 #      2. Создаю клиента с неверным ключом:
     bad_client = APIClient(api_key=INVALID_API_KEY)
@@ -65,7 +65,7 @@ from data.test_data import INVALID_API_KEY
 def test_search_non_existent()
 #    📌 Что проверяем: поиск по несуществующему запросу.
 #    Шаги:
-#      1. Импортирую NON_EXISTENT_QUERY из data.test_data.
+#      1. Импортирую NON_EXISTENT_QUERY из data.data.
 from data.test_data import NON_EXISTENT_QUERY
 #      2. Отправляю запрос:
     api_client.search_movie(NON_EXISTENT_QUERY)
@@ -84,7 +84,7 @@ from data.test_data import NON_EXISTENT_QUERY
 def test_movies_by_year_and_genre()
 #    📌 Что проверяем: фильтрация по году и жанру.
 #    Шаги:
-#      1. Импортирую YEAR_FOR_FILTER и GENRE_FOR_FILTER из data.test_data.
+#      1. Импортирую YEAR_FOR_FILTER и GENRE_FOR_FILTER из data.data.
 from data.test_data import (
     YEAR_FOR_FILTER,
     GENRE_FOR_FILTER,
@@ -113,7 +113,7 @@ from data.test_data import (
 def  test_movies_by_rating()
 #    📌 Что проверяем: фильтрация по рейтингу IMDB.
 #    Шаги:
-#      1. Импортирую RATING_MIN и RATING_MAX из data.test_data.
+#      1. Импортирую RATING_MIN и RATING_MAX из data.data.
 from data.test_data import (
     RATING_MIN,
     RATING_MAX,

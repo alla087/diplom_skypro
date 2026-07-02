@@ -3,7 +3,7 @@ import os
 # Настройки окружения
 BASE_URL = "https://www.kinopoisk.ru/"
 API_BASE_URL = "https://api.kinopoisk.dev/"
-API_KEY = ""
+API_KEY = "E87R7GE-H6A4YFW-PHZWKBP-W4PT0VY"
 
 # Таймауты
 UI_TIMEOUT = 10
