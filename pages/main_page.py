@@ -2,7 +2,6 @@ import allure
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 from pages.search_results_page import SearchResultsPage
-from pages.profile_page import ProfilePage
 
 
 class MainPage(BasePage):
