@@ -1,0 +1,8 @@
+allure-pytest
+allure-python-commons
+black
+flake8
+requests
+selenium
+pytest
+webdriver-manager
