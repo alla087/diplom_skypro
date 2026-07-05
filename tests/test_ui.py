@@ -129,3 +129,173 @@ def test_search_non_existent(driver):
         # Проверяем, что нет ни одной карточки фильма
         cards = search_results.get_film_cards(limit=10)
         assert len(cards) == 0, f"Найдено карточек: {len(cards)}, ожидалось 0"
+
+
+@allure.feature("UI")
+@allure.story("Навигация")
+@pytest.mark.ui
+def test_series_link_opens_new_tab(driver):
+    """
+    Проверяет, что клик по ссылке 'Сериалы' в главном меню открывает новую вкладку,
+    а её URL содержит 'series'.
+    """
+    from selenium.webdriver.common.by import By
+    from selenium.webdriver.support.ui import WebDriverWait
+
+    main_page = MainPage(driver)
+    main_page.open("https://www.kinopoisk.ru/")
+
+    # Локатор ссылки «Сериалы»
+    series_link_locator = (By.XPATH, "//a[contains(text(), 'Сериалы')]")
+    series_link = main_page.find_element(series_link_locator)
+
+    # Запоминаем текущие вкладки
+    initial_tabs = driver.window_handles
+
+    with allure.step("Кликнуть по ссылке 'Сериалы'"):
+        series_link.click()
+
+    with allure.step("Дождаться открытия новой вкладки"):
+        WebDriverWait(driver, 10).until(
+            lambda d: len(d.window_handles) > len(initial_tabs)
+        )
+
+    # Переключаемся на новую вкладку
+    new_tab = [tab for tab in driver.window_handles if tab not in initial_tabs][0]
+    driver.switch_to.window(new_tab)
+
+    with allure.step("Проверить, что URL новой вкладки содержит 'series'"):
+        assert (
+            "series" in driver.current_url
+        ), f"Ожидался URL с 'series', получен {driver.current_url}"
+
+    # Закрываем новую вкладку и возвращаемся на исходную (чистота)
+    driver.close()
+    driver.switch_to.window(initial_tabs[0])
+
+    @allure.feature("UI")
+    @allure.story("Навигация")
+    @pytest.mark.ui
+    def test_films_link_opens_new_tab(driver):
+        """
+        Проверяет, что клик по ссылке 'Фильмы' в главном меню открывает новую вкладку,
+        а её URL содержит 'film' или 'movies'.
+        """
+        from selenium.webdriver.common.by import By
+        from selenium.webdriver.support.ui import WebDriverWait
+
+        main_page = MainPage(driver)
+        main_page.open("https://www.kinopoisk.ru/")
+
+        # Локатор ссылки «Фильмы»
+        films_link_locator = (By.XPATH, "//a[contains(text(), 'Фильмы')]")
+        films_link = main_page.find_element(films_link_locator)
+
+        initial_tabs = driver.window_handles
+
+        with allure.step("Кликнуть по ссылке 'Фильмы'"):
+            films_link.click()
+
+        with allure.step("Дождаться открытия новой вкладки"):
+            WebDriverWait(driver, 10).until(
+                lambda d: len(d.window_handles) > len(initial_tabs)
+            )
+
+        new_tab = [tab for tab in driver.window_handles if tab not in initial_tabs][0]
+        driver.switch_to.window(new_tab)
+
+        with allure.step(
+            "Проверить, что URL новой вкладки содержит 'film' или 'movies'"
+        ):
+            current_url = driver.current_url
+            assert (
+                "film" in current_url or "movies" in current_url
+            ), f"Ожидался URL с 'film' или 'movies', получен {current_url}"
+
+        # Закрываем новую вкладку и возвращаемся на исходную
+        driver.close()
+        driver.switch_to.window(initial_tabs[0])
+
+    @allure.feature("UI")
+    @allure.story("Навигация")
+    @pytest.mark.ui
+    def test_news_link_opens_new_tab(driver):
+        """
+        Проверяет, что клик по ссылке 'Новости' в главном меню открывает новую вкладку,
+        а её URL содержит 'news'.
+        """
+        from selenium.webdriver.common.by import By
+        from selenium.webdriver.support.ui import WebDriverWait
+
+        main_page = MainPage(driver)
+        main_page.open("https://www.kinopoisk.ru/")
+
+        # Локатор ссылки «Новости» - возможно, в меню это есть
+        news_link_locator = (By.XPATH, "//a[contains(text(), 'Новости')]")
+        news_link = main_page.find_element(news_link_locator)
+
+        initial_tabs = driver.window_handles
+
+        with allure.step("Кликнуть по ссылке 'Новости'"):
+            news_link.click()
+
+        with allure.step("Дождаться открытия новой вкладки"):
+            WebDriverWait(driver, 10).until(
+                lambda d: len(d.window_handles) > len(initial_tabs)
+            )
+
+        new_tab = [tab for tab in driver.window_handles if tab not in initial_tabs][0]
+        driver.switch_to.window(new_tab)
+
+        with allure.step("Проверить, что URL новой вкладки содержит 'news'"):
+            current_url = driver.current_url
+            assert (
+                "news" in current_url
+            ), f"Ожидался URL с 'news', получен {current_url}"
+
+        driver.close()
+        driver.switch_to.window(initial_tabs[0])
+
+
+@allure.feature("UI")
+@allure.story("Навигация")
+@pytest.mark.ui
+def test_ratings_link_opens_new_tab(driver):
+    """
+    Проверяет, что клик по ссылке 'Рейтинги' в главном меню открывает новую вкладку,
+    а её URL содержит 'rating' или 'top'.
+    """
+    from selenium.webdriver.common.by import By
+    from selenium.webdriver.support.ui import WebDriverWait
+
+    main_page = MainPage(driver)
+    main_page.open("https://www.kinopoisk.ru/")
+
+    # Локатор ссылки «Рейтинги»
+    ratings_link_locator = (By.XPATH, "//a[contains(text(), 'Рейтинги')]")
+    ratings_link = main_page.find_element(ratings_link_locator)
+
+    # Запоминаем текущие вкладки
+    initial_tabs = driver.window_handles
+
+    with allure.step("Кликнуть по ссылке 'Рейтинги'"):
+        ratings_link.click()
+
+    with allure.step("Дождаться открытия новой вкладки"):
+        WebDriverWait(driver, 10).until(
+            lambda d: len(d.window_handles) > len(initial_tabs)
+        )
+
+    # Переключаемся на новую вкладку
+    new_tab = [tab for tab in driver.window_handles if tab not in initial_tabs][0]
+    driver.switch_to.window(new_tab)
+
+    with allure.step("Проверить, что URL новой вкладки содержит 'rating' или 'top'"):
+        current_url = driver.current_url
+        assert (
+            "rating" in current_url or "top" in current_url
+        ), f"Ожидался URL с 'rating' или 'top', получен {current_url}"
+
+    # Закрываем новую вкладку и возвращаемся на исходную
+    driver.close()
+    driver.switch_to.window(initial_tabs[0])
